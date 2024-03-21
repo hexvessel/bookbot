@@ -11,13 +11,11 @@ module.exports = {
     ),
   async execute(interaction) {
     const options = interaction.options.get("id");
-
     try {
       const v = await model.findOne({ where: { id: options.value } });
-
       const howManyBooks = await model.findAll();
-
       if (isNaN(options.value)) {
+        console.log(4);
         logger.warn(`Vote Book isNaN`);
         return interaction.reply(`id = number`);
       }
@@ -56,10 +54,9 @@ module.exports = {
             { name: "Hlekkur á Bók", value: `${entry.link}` }
           );
         });
+
         logger.info(
-          `${interaction.user.globalName} greiddi atkvæði með ${
-            tagList[options.value].title
-          } `
+          `${interaction.user.globalName} greiddi atkvæði með ${options.value} `
         );
         return await interaction.reply({ embeds: [embed] });
       } else {
@@ -120,7 +117,7 @@ module.exports = {
         logger.error(error.name);
         return interaction.reply("SequelizeUniqueConstraintError");
       }
-      logger.error(error.name);
+      logger.error(error);
       return interaction.reply("Hmm, Villa :(");
     }
   },
