@@ -105,9 +105,7 @@ module.exports = {
           );
         }
         logger.info(
-          `${interaction.user.globalName} greiddi atkvæði með ${
-            tagList[options.value].title
-          } `
+          `${interaction.user.globalName} greiddi atkvæði með ${options.value} `
         );
         await interaction.reply({ embeds: [first_embed] });
         return await interaction.followUp({ embeds: [second_embed] });
